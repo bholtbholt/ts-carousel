@@ -59,12 +59,8 @@
   },
   "jest": {
     "mapCoverage": true,
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/polyfills.js"
-    ],
+    "collectCoverageFrom": ["src/**/*.{js,jsx,ts,tsx}"],
+    "setupFiles": ["<rootDir>/config/polyfills.js"],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.ts?(x)",
       "<rootDir>/src/**/?(*.)(spec|test).ts?(x)"
@@ -82,28 +78,10 @@
     "moduleNameMapper": {
       "^react-native$": "react-native-web"
     },
-    "moduleFileExtensions": [
-      "web.ts",
-      "ts",
-      "web.tsx",
-      "tsx",
-      "web.js",
-      "js",
-      "web.jsx",
-      "jsx",
-      "json",
-      "node"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfigFile": "/Users/brianholt/Documents/ts-carousel/tsconfig.test.json"
-      }
-    }
+    "moduleFileExtensions": ["ts", "tsx", "js", "jsx", "json", "node"]
   },
   "babel": {
-    "presets": [
-      "react-app"
-    ]
+    "presets": ["react-app"]
   },
   "eslintConfig": {
     "extends": "react-app"
