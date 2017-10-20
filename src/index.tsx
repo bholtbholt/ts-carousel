@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { Image } from './Types';
 import './Normalize.css';
+import './index.css';
 import Carousel from './Carousel';
 
 const initImageData: Image[] = [

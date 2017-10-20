@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Image } from './Types';
+import './Slide.css';
 
 interface Props {
   image: Image;
@@ -7,10 +8,8 @@ interface Props {
 }
 
 export function Slide(props: Props) {
+  const classes = props.isActive ? 'slide _active' : 'slide';
   return (
-    <div>
-      <p>{props.isActive ? 'Active' : 'Not Active'}</p>
-      <img src={props.image.src} alt={props.image.alt} height="100" />
-    </div>
+    <img className={classes} src={props.image.src} alt={props.image.alt} />
   );
 }

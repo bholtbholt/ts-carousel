@@ -1,0 +1,9 @@
+.slide {
+  display: none;
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.slide._active {
+  display: block;
+}

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ImageSrc, ImageId, Image } from './Types';
 import { Slide } from './Slide';
+import './Carousel.css';
 
 interface Props {
   images: Image[];
@@ -31,14 +32,16 @@ class Carousel extends React.Component<Props, State> {
     const { currentImage } = this.state;
 
     return (
-      <div className="Carousel">
+      <div className="carousel">
+        <button className="carousel-btn _left" onClick={this.decrementSlide}>
+          Decrement
+        </button>
+        <button className="carousel-btn _right" onClick={this.incrementSlide}>
+          Increment
+        </button>
         {this.props.images.map((image, index) => (
           <Slide key={index} image={image} isActive={index === currentImage} />
         ))}
-        <div>
-          <button onClick={this.decrementSlide}>Decrement</button>
-          <button onClick={this.incrementSlide}>Increment</button>
-        </div>
       </div>
     );
   }
