@@ -1,24 +1,120 @@
+$carouselBorder: $white;
+
+$carouselBtnScaleProps: scale(1.1, 1.1);
+$carouselBtnTransitionProps: 100ms ease-in;
+
+$circleBG: $white;
+$circleSize: 6em;
+$circleOffset: -1.2em;
+
+$arrowColor: $silver;
+$arrowColorHover: $lightGrey;
+$arrowContainer: 1em;
+$arrowHeight: 1.4em;
+$arrowWidth: 1.6em;
+
 .carousel {
   position: relative;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  border: 1em solid $carouselBorder;
   overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  border: 1em solid $carouselBorder;
+
+  @media (orientation: landscape) {
+    height: 100%;
+  }
+
+  @media (orientation: portrait) {
+    width: 100%;
+  }
 }
 
 .carousel-btn {
   position: absolute;
   top: 0;
   bottom: 0;
+  background: transparent;
+  border: none;
   cursor: pointer;
+  width: 2em;
+}
+
+.carousel-btn._left,
+.carousel-btn._right {
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    background-color: $circleBG;
+    border-radius: 50%;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.3);
+
+    height: $circleSize;
+    width: $circleSize;
+
+    transition: transform $carouselBtnTransitionProps;
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+
+    background-color: transparent;
+    border-style: solid;
+
+    height: $arrowContainer;
+    width: $arrowContainer;
+
+    transition: border-color $carouselBtnTransitionProps,
+      transform $carouselBtnTransitionProps;
+  }
+
+  &:hover:before,
+  &:hover:after {
+    transform: $carouselBtnScaleProps;
+  }
 }
 
 .carousel-btn._left {
   left: 0;
+
+  &:before {
+    right: $circleOffset;
+  }
+
+  &:after {
+    border-width: $arrowHeight $arrowWidth $arrowHeight 0;
+    border-color: transparent $arrowColor transparent transparent;
+    right: 0;
+  }
+
+  &:hover:after {
+    border-color: transparent $arrowColorHover transparent transparent;
+  }
 }
 
 .carousel-btn._right {
   right: 0;
+
+  &:before {
+    left: $circleOffset;
+  }
+
+  &:after {
+    border-width: $arrowHeight 0 $arrowHeight $arrowWidth;
+    border-color: transparent transparent transparent $arrowColor;
+    left: 0;
+  }
+
+  &:hover:after {
+    border-color: transparent transparent transparent $arrowColorHover;
+  }
 }

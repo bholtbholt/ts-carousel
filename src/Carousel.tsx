@@ -33,41 +33,63 @@ class Carousel extends React.Component<Props, State> {
 
     return (
       <div className="carousel">
-        <button className="carousel-btn _left" onClick={this.decrementSlide}>
-          Decrement
-        </button>
-        <button className="carousel-btn _right" onClick={this.incrementSlide}>
-          Increment
-        </button>
         {this.props.images.map((image, index) => (
           <Slide key={index} image={image} isActive={index === currentImage} />
         ))}
+        <button className="carousel-btn _left" onClick={this.decrementSlide} />
+        <button className="carousel-btn _right" onClick={this.incrementSlide} />
       </div>
     );
   }
 
   private incrementSlide = () => {
     this.setState(prevState => ({
-      currentImage: Math.min(
-        prevState.currentImage + 1,
+      currentImage: this.loopImages(
+        prevState.currentImage,
         prevState.imageData.length - 1,
+        true,
       ),
+    }));
+    this.setState(prevState => ({
       imageData: this.updateImageData(
         prevState.imageData,
-        this.state.currentImage + 1,
+        prevState.currentImage,
       ),
     }));
   };
 
   private decrementSlide = () => {
     this.setState(prevState => ({
-      currentImage: Math.max(prevState.currentImage - 1, 0),
+      currentImage: this.loopImages(
+        prevState.currentImage,
+        prevState.imageData.length - 1,
+        false,
+      ),
+    }));
+    this.setState(prevState => ({
       imageData: this.updateImageData(
         prevState.imageData,
-        this.state.currentImage - 1,
+        prevState.currentImage,
       ),
     }));
   };
+
+  // loopImages returns the new ImageId position
+  // while calculating if the loop has reached
+  // either limit (upper/lower)
+  private loopImages(
+    currentImage: ImageId,
+    dataLength: number,
+    shouldIncrement: boolean,
+  ): ImageId {
+    if (shouldIncrement) {
+      return currentImage >= dataLength
+        ? 0
+        : Math.min(currentImage + 1, dataLength);
+    } else {
+      return currentImage > 0 ? Math.max(currentImage - 1, 0) : dataLength;
+    }
+  }
 
   private updateImageData(
     images: ImageData[],

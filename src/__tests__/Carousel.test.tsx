@@ -32,6 +32,27 @@ it('logs image data', () => {
   expect(console.table).toHaveBeenCalled();
 });
 
+describe('looping over images', () => {
+  const carousel = ReactTestUtils.renderIntoDocument(
+    <Carousel images={images} />,
+  );
+  const loopLength = 3;
+
+  it('increments and loops to the start once hitting the end', () => {
+    expect(carousel.loopImages(0, loopLength, true)).toBe(1);
+    expect(carousel.loopImages(1, loopLength, true)).toBe(2);
+    expect(carousel.loopImages(2, loopLength, true)).toBe(3);
+    expect(carousel.loopImages(3, loopLength, true)).toBe(0);
+  });
+
+  it('decrements and loops to the end once hitting the start', () => {
+    expect(carousel.loopImages(3, loopLength, false)).toBe(2);
+    expect(carousel.loopImages(2, loopLength, false)).toBe(1);
+    expect(carousel.loopImages(1, loopLength, false)).toBe(0);
+    expect(carousel.loopImages(0, loopLength, false)).toBe(3);
+  });
+});
+
 describe('imageData', () => {
   it('initializes imageData with the currentImage already viewed', () => {
     const carousel = ReactTestUtils.renderIntoDocument(

@@ -13,9 +13,10 @@ module.exports = {
     require('postcss-nested')(),
     require('postcss-simple-vars')({
       variables: {
-        $bodyBG: '#000',
-
-        $carouselBorder: '#fff',
+        $black: '#000',
+        $white: '#FFF',
+        $silver: '#C0C0C0',
+        $lightGrey: '#D3D3D3',
       },
     }),
   ],

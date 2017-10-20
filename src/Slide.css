@@ -1,7 +1,14 @@
 .slide {
   display: none;
-  max-height: 100%;
-  max-width: 100%;
+  object-fit: contain;
+
+  @media (orientation: landscape) {
+    height: 100%;
+  }
+
+  @media (orientation: portrait) {
+    width: 100%;
+  }
 }
 
 .slide._active {
